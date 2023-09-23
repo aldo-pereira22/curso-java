@@ -6,6 +6,8 @@ import boardgame.Position;
 import chess.piece.King;
 import chess.piece.Rook;
 
+import java.io.PipedOutputStream;
+
 public class ChessMatch {
     private Board board;
 
@@ -28,6 +30,7 @@ public class ChessMatch {
         Position source = sourcePostion.toPosition();
         Position target = targetPosition.toPosition();
         validateSourcePosition(source);
+        validateTargetPosition(source, target);
         Piece captrePiece = makeMove(source, target);
         return (ChessPiece) captrePiece;
     }
@@ -44,6 +47,12 @@ public class ChessMatch {
 
         if(!board.piece(position).isThereAnyPossibleMove()){
             throw new ChessException("There is no possible moves for the chosen piece");
+        }
+    }
+
+    private void validateTargetPosition(Position source, Position target){
+        if(!board.piece(source).possibleMove(target)){
+            throw new ChessException("The chosen piece can't move to target");
         }
     }
     private void placeNewPiece(char column, int row, ChessPiece piece){
