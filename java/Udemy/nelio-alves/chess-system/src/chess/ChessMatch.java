@@ -145,7 +145,7 @@ public class ChessMatch {
 
             ChessPiece rook = (ChessPiece) board.removePiece(targetT);
             board.placePiece(rook, sourceT);
-            rook.decreaseMoveCount();
+            rook.decreaseMoveCount(); g
 
         }
     }
