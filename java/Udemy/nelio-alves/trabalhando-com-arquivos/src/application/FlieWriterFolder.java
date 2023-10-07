@@ -21,7 +21,7 @@ public class FlieWriterFolder {
         System.out.println("\n\n\n\n\n\nFiles: ");
         for (File file: files){
             System.out.println(file);
-        }/
+        }
 
         sc.close();
     }
