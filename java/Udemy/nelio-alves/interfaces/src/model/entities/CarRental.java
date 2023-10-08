@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 
 public class CarRental {
 
-    private LocalDateTime start;
-    private LocalDateTime finish;
+    private LocalDate start;
+    private LocalDate finish;
 
     private Vehicle vehicle;
     private Invoice invoice;
@@ -15,25 +15,25 @@ public class CarRental {
 
     }
 
-    public CarRental(LocalDateTime start, LocalDateTime finish, Vehicle vehicle) {
+    public CarRental(LocalDate start, LocalDate finish, Vehicle vehicle) {
         this.start = start;
         this.finish = finish;
         this.vehicle = vehicle;
     }
 
-    public LocalDateTime getStart() {
+    public LocalDate getStart() {
         return start;
     }
 
-    public void setStart(LocalDateTime start) {
+    public void setStart(LocalDate start) {
         this.start = start;
     }
 
-    public LocalDateTime getFinish() {
+    public LocalDate getFinish() {
         return finish;
     }
 
-    public void setFinish(LocalDateTime finish) {
+    public void setFinish(LocalDate finish) {
         this.finish = finish;
     }
 

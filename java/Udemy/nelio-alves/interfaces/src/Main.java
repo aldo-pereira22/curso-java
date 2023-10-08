@@ -3,6 +3,7 @@ import model.entities.Vehicle;
 import model.service.BrazilTaxService;
 import model.service.RentalService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -14,19 +15,24 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter fmt1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
         System.out.println("Entre com os dados do aluguel: ");
         System.out.print("Modelo do carro: ");
         String carModel = sc.nextLine();
+
         System.out.println("Retirada (dd/MM/yyyy hh:mm) ");
-        LocalDateTime start = LocalDateTime.parse(sc.next(), fmt);
+        LocalDate start = LocalDate.parse(sc.next(), fmt);
+        System.out.println(start);
+
         System.out.println("Retorno (dd/MM/yyyy hh:mm) ");
-        LocalDateTime finish = LocalDateTime.parse(sc.next(), fmt);
+        LocalDate finish = LocalDate.parse(sc.next(), fmt);
 
         CarRental cr = new CarRental(start, finish, new Vehicle(carModel));
 
         System.out.print("Entre com o preço por hora");
         double pricePerHour = sc.nextDouble();
+
         System.out.print("Entre com preço por dia ");
         double pricePeDay = sc.nextDouble();
 
