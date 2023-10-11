@@ -1,5 +1,6 @@
 package curso.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import curso.entities.Order;
 import jakarta.persistence.*;
 
@@ -19,6 +20,7 @@ public class Payment implements Serializable {
     private Long id;
     private Instant moment;
 
+    @JsonIgnore
     @OneToOne
     @MapsId
     private Order order;
