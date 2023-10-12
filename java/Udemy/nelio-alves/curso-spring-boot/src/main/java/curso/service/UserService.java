@@ -2,8 +2,11 @@ package curso.service;
 
 import curso.entities.User;
 import curso.repositories.UserRepository;
+import curso.resources.exceptions.DataBaseException;
 import curso.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +22,6 @@ public class UserService {
         return userRepository.findAll();
     }
 
-
     public User findById(Long id){
         Optional<User> obj = userRepository.findById(id);
         return obj.orElseThrow( () -> new ResourceNotFoundException(id));
@@ -29,10 +31,37 @@ public class UserService {
         return userRepository.save(obj);
     }
 
-    public void delete (Long id){
-        userRepository.deleteById(id);
-    }
+//    public void delete (Long id){
+//        try {
+//            userRepository.deleteById(id);
+//        }catch (EmptyResultDataAccessException e){
+//            throw new ResourceNotFoundException(id);
+//        }
+//    }
 
+//    public void delete(Long id) {
+//        try {
+//            if (userRepository.existsById(id)) {
+//                userRepository.deleteById(id);
+//            } else {
+//                throw new ResourceNotFoundException(id);
+//            }
+//        } catch (DataIntegrityViolationException e) {
+//            e.printStackTrace();
+////            throw new DatabaseException(e.getMessage());
+//        }
+//    }
+
+    public void delete(Long id){
+        try {
+            if(!userRepository.existsById(id)) throw new ResourceNotFoundException(id);
+            userRepository.deleteById(id);
+        }catch (EmptyResultDataAccessException e){
+            throw new ResourceNotFoundException(id);
+        }catch (DataIntegrityViolationException e ){
+            throw new DataBaseException(e.getMessage());
+        }
+    }
     public User update(Long id, User obj){
         User entity = userRepository.getReferenceById(id);
         updateData(entity, obj);
