@@ -39,7 +39,7 @@ public class ProductValidationService {
             handleSuccess(event);
         }catch (Exception ex){
             log.error("Error trying to validate products", ex);
-            handleFailCurrenteNotExecuted(event, ex.getMessage());
+            handleFailCurrentNotExecuted(event, ex.getMessage());
         }
 
 
@@ -110,7 +110,7 @@ public class ProductValidationService {
         event.addToHistory(history);
     }
 
-    private void handleFailCurrenteNotExecuted(Event event, String message){
+    private void handleFailCurrentNotExecuted(Event event, String message){
         event.setStatus(ESagaStatus.ROLLBACK_PENDING);
         event.setSource(CURRENT_SOURCE);
         addHistory(event, "Fail to validate products: ".concat(message));
