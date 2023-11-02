@@ -1,5 +1,6 @@
 package br.com.microservices.orchestrated.paymentservice.core.model;
 
+import br.com.microservices.orchestrated.paymentservice.core.enums.EPaymentStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,15 @@ public class Payment {
     private String transactionId;
 
     @Column(nullable = false)
+    private int totalItems;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private double totalAmount;
+
+    private EPaymentStatus status;
+
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
@@ -37,6 +47,7 @@ public class Payment {
         var now = LocalDateTime.now();
         createdAt = now;
         updateAt = now;
+        status = EPaymentStatus.PENDING;
     }
 
     @PreUpdate
