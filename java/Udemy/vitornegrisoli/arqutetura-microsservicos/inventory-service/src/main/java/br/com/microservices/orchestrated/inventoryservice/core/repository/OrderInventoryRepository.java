@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface OrderInventoryRepository extends JpaRepository<Inventory, Integer> {
+public interface OrderInventoryRepository extends JpaRepository<OrderInventory, Integer> {
 
-    Boolean existByOrderIdAndTransactionId(String orderId, String transactionId);
+    Boolean existsByOrderIdAndTransactionId(String orderId, String transactionId);
     List<Optional<OrderInventory>> findByOrderIdAndTransactionId(String orderId, String transactionId);
 
 }
