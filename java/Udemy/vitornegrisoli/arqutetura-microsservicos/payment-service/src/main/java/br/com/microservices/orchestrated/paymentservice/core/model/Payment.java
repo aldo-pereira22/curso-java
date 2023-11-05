@@ -31,7 +31,6 @@ public class Payment {
     private int totalItems;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     private double totalAmount;
 
     private EPaymentStatus status;
